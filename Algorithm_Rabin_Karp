@@ -1,0 +1,31 @@
+package rabin_karp;
+/**
+ *
+ * @author Nidhi Sharma
+ */
+public class Algo_rabin_karp {
+    Numerical_pattern np=new Numerical_pattern();
+    public String[] rabinKarp(String pattern,String str,int prime){
+        String subString[]=new String[str.length()];
+        int string_value[]=new int[subString.length];
+        int pattern_value=np.num_pattern(prime,pattern);
+        for(int i=0;i<str.length();i++)
+            subString[i]="";
+        int plen=pattern.length();
+        for(int i=0;i<str.length()-plen+1;i++){
+              for(int j=i;j<(i+plen);j++){
+               subString[i]+=str.charAt(j);
+            } 
+        }
+        for(int i=0;i<subString.length;i++){
+           string_value[i]= np.num_pattern(prime,subString[i]);
+        }
+        for(int i=0;i<string_value.length;i++){
+            if(pattern_value==string_value[i]){
+                System.out.println("Pattern found at position "+(i+1)+" of string");
+                break;
+            }              
+        }
+        return subString;
+    }
+}
